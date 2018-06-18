@@ -14,18 +14,24 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.macgavrina.weathercomparedwithyesterday.R
+import com.macgavrina.weathercomparedwithyesterday.R.id.*
 import com.macgavrina.weathercomparedwithyesterday.adapters.WeatherRecyclerViewAdapter
-import com.macgavrina.weathercomparedwithyesterday.fragments.LOG_TAG
 import com.macgavrina.weathercomparedwithyesterday.fragments.WeatherListFragment
 import com.macgavrina.weathercomparedwithyesterday.loaders.WeatherLoader
 import com.macgavrina.weathercomparedwithyesterday.model.WeatherItem
+import com.macgavrina.weathercomparedwithyesterday.model.WeatherItemFromAPI
+import com.macgavrina.weathercomparedwithyesterday.model.WeatherRepository
+import com.macgavrina.weathercomparedwithyesterday.model.WeatherRepositoryProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_weather_list.*
 
-var list:MutableList<WeatherItem>? = null
+const val LOG_TAG:String = "WeatherApp"
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, LoaderManager.LoaderCallbacks<MutableList<WeatherItem>?> {
+
+    var list:MutableList<WeatherItem>? = null
+    //val compositeDisposable
 
     override fun onCreateLoader(p0: Int, p1: Bundle?): Loader<MutableList<WeatherItem>?> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -80,13 +86,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         list = prepareDataForList()
         viewManager = LinearLayoutManager(this)
+
         weather_recycler_view.adapter = WeatherRecyclerViewAdapter(list)
         weather_recycler_view.layoutManager = viewManager
+
+        getWeatherByAPI()
 
         //ToDo REFACT сделать обновление списка через notifyDataSetChanged
 /*      list = prepareDataForList()
         Log.d(LOG_TAG, "Notify dataset changed")
         weather_recycler_view.adapter.notifyDataSetChanged()*/
+    }
+
+    private fun getWeatherByAPI() {
+        val weatherItemFromAPI:WeatherItemFromAPI = WeatherItemFromAPI("37.8267","-122.4233")
+        val weatherRepository:WeatherRepository = WeatherRepositoryProvider.provideWeatherRepository()
+        weatherRepository.getWeather()
     }
 
     fun prepareDataForList():MutableList<WeatherItem> {

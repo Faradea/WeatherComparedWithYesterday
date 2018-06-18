@@ -3,7 +3,6 @@ package com.macgavrina.weathercomparedwithyesterday.loaders
 import android.content.AsyncTaskLoader
 import android.content.Context
 import android.os.SystemClock
-import com.macgavrina.weathercomparedwithyesterday.model.City
 import com.macgavrina.weathercomparedwithyesterday.model.WeatherItem
 
 public class WeatherLoader(context: Context?) : AsyncTaskLoader<MutableList<WeatherItem>?>(context) {

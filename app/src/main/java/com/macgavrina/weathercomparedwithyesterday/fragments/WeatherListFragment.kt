@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_weather_list.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-val LOG_TAG = "WeatherApp"
+const val LOG_TAG:String = "WeatherApp"
 
 /**
  * A simple [Fragment] subclass.
