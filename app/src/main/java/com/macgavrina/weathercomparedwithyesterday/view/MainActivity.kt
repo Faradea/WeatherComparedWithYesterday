@@ -22,6 +22,9 @@ import com.macgavrina.weathercomparedwithyesterday.model.WeatherItem
 import com.macgavrina.weathercomparedwithyesterday.model.WeatherItemFromAPI
 import com.macgavrina.weathercomparedwithyesterday.model.WeatherRepository
 import com.macgavrina.weathercomparedwithyesterday.model.WeatherRepositoryProvider
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_weather_list.*
@@ -31,7 +34,8 @@ const val LOG_TAG:String = "WeatherApp"
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, LoaderManager.LoaderCallbacks<MutableList<WeatherItem>?> {
 
     var list:MutableList<WeatherItem>? = null
-    //val compositeDisposable
+    val listRX:MutableList<WeatherItemFromAPI> = mutableListOf()
+    val compositeDisposable:CompositeDisposable = CompositeDisposable()
 
     override fun onCreateLoader(p0: Int, p1: Bundle?): Loader<MutableList<WeatherItem>?> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
