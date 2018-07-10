@@ -24,7 +24,7 @@ class SumLoader(context: Context, val a: Int, val b:Int) : Loader<Cursor>(contex
     override fun onForceLoad() {
         Log.d("SumApp", "onForceLoad")
 
-        val call = sumService.performPostCallWithQuery(a, b)
+/*        val call = sumService.performPostCallWithQuery(a, b)
 
 
         call.enqueue(object : Callback<SumResult> {
@@ -48,7 +48,7 @@ class SumLoader(context: Context, val a: Int, val b:Int) : Loader<Cursor>(contex
             override fun onFailure(call: Call<SumResult>, t: Throwable) {
                 deliverResult(null)
             }
-        })
+        })*/
 
     }
 }
